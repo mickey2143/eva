@@ -20,7 +20,10 @@ export default function LiveJsonPreviewer() {
 
   
   if(jsonInput === ""){
-    localStorage.removeItem("preview")
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("preview")
+    }
+    
   }
   function handleEdit(){
     setEditMode(!editMode)
@@ -47,16 +50,24 @@ export default function LiveJsonPreviewer() {
           theme: "dark",
           transition: Bounce,
           });
+
+          if (typeof window !== "undefined") {
+            localStorage.clear()
+          }
           
-          localStorage.clear()
+          
 
         return 0
       }
       
       
 
+ if (typeof window !== "undefined") {
+                
       localStorage.setItem("preview",value)
       localStorage.setItem("v1",value)
+        }
+     
      
       const parsed = JSON.parse(value);
       if(!Array.isArray(parsed.data)) throw new Error("Invalid format");
