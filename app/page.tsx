@@ -35,17 +35,15 @@ export default function LiveJsonPreviewer() {
   const handleInputChange = (value: string) => {
     try {
       setJsonInput(value);
-      // console.log(validateNoDuplicateKeys(value))
-      const validation = validateSchema(jsonInput)
-
+      const validation = validateSchema(value)
       if(!validation.success){
         toast.error([...validation.error].join(" "), {
           position: "top-right",
-          autoClose: 5000,
+          autoClose: 3000,
           hideProgressBar: false,
           closeOnClick: false,
           pauseOnHover: true,
-          draggable: true,
+          draggable: false,
           progress: undefined,
           theme: "dark",
           transition: Bounce,
@@ -54,7 +52,6 @@ export default function LiveJsonPreviewer() {
           if (typeof window !== "undefined") {
             localStorage.clear()
           }
-          
           
 
         return 0
@@ -68,7 +65,7 @@ export default function LiveJsonPreviewer() {
       localStorage.setItem("v1",value)
         }
      
-     
+    
       const parsed = JSON.parse(value);
       if(!Array.isArray(parsed.data)) throw new Error("Invalid format");
       setParsedData(parsed.data);
@@ -93,7 +90,7 @@ export default function LiveJsonPreviewer() {
             onClick={() => setViewMode(!viewMode)}
             className="px-4 py-1.5 text-sm rounded-md border border-green-500 text-green-400 hover:bg-green-500/10 transition"
           >
-            {~viewMode ? "View Preview":"Off View"}
+            {!viewMode ? "View Preview":"Off View"}
 
           </button>
         </div>
