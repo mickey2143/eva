@@ -93,7 +93,7 @@ export default function LiveJsonPreviewer() {
             onClick={() => setViewMode(!viewMode)}
             className="px-4 py-1.5 text-sm rounded-md border border-green-500 text-green-400 hover:bg-green-500/10 transition"
           >
-            {viewMode ? "View Preview":"Off View"}
+            {~viewMode ? "View Preview":"Off View"}
 
           </button>
         </div>
@@ -111,7 +111,7 @@ export default function LiveJsonPreviewer() {
         {error && <p className="text-red-400 text-sm mt-2">{error}</p>}
       </div>
 
-    {viewMode ? (<div className="bg-gray-800 md:hidden p-4 relative rounded-lg shadow-md h-full w-full md:w-2/5">
+    {!viewMode ? (<div className="bg-gray-800 md:hidden p-4 relative rounded-lg shadow-md h-full w-full md:w-2/5">
         <Upload handleInputChange={handleInputChange}/>
 
         <textarea
@@ -126,7 +126,7 @@ export default function LiveJsonPreviewer() {
       
 
     
-    {!viewMode ? ( <div className="bg-gray-800 p-4 rounded-lg shadow-md h-full w-full md:w-3/5 md:hidden block text-white overflow-y-auto">
+    {viewMode ? ( <div className="bg-gray-800 p-4 rounded-lg shadow-md h-full w-full md:w-3/5 md:hidden block text-white overflow-y-auto">
         <div className="flex justify-between items-center mb-4">
           <button
             onClick={() => handleEdit()}
